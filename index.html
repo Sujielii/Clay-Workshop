@@ -311,8 +311,174 @@ h1 br {
         }
 
         /* 移动端响应式调整 - 模拟图片中的布局 */
-        @media (max-width: 768px) {}
-           
+        @media (max-width: 768px) {
+            .welcome-content h1 {
+                font-family: 'Fascinate Inline', cursive;
+                font-size: 1.6rem;
+                color: #e88f62;
+            }
+            
+            .book-icon img {
+                width: 60px;
+            }
+            
+            /* 重置所有角色链接样式，精确定位与图片对应 */
+            .characters-container a.character-link {
+                position: absolute !important;
+            }
+            
+            /* 顶部角色 - 参考图片中的位置 */
+            .characters-container a.character-link:nth-child(1) { /* 雪人 */
+                top: 11% !important;
+                right: 15% !important;
+                width: 35% !important;
+                z-index: 10;
+            }
+            
+            .characters-container a.character-link:nth-child(2) { /* 蛋糕 */
+                top: 0% !important;
+                right: -5% !important;
+                width: 30% !important;
+                transform: rotate(0deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(3) { /* 狐狸 */
+                top: -8% !important;
+                left: 10% !important;
+                width: 35% !important;
+                transform: rotate(0deg) !important;
+            }
+            .book-icon {
+            width: 100px;
+            margin: 0 auto 10px;
+        }
+        
+        .book-icon img {
+            width: 100%;
+        }
+
+        /* 移动端响应式调整 - 模拟图片中的布局 */
+        @media (max-width: 768px) {
+            .welcome-content h1 {
+                font-family: 'Fascinate Inline', cursive;
+                font-size: 1.6rem;
+                color: #e88f62;
+            }
+            
+            .book-icon img {
+                width: 60px;
+            }
+            
+            /* 重置所有角色链接样式，精确定位与图片对应 */
+            .characters-container a.character-link {
+                position: absolute !important;
+            }
+            
+            /* 顶部角色 - 参考图片中的位置 */
+            .characters-container a.character-link:nth-child(1) { /* 雪人 */
+                top: 11% !important;
+                right: 15% !important;
+                width: 35% !important;
+                z-index: 10;
+            }
+            
+            .characters-container a.character-link:nth-child(2) { /* 蛋糕 */
+                top: 0% !important;
+                right: -5% !important;
+                width: 30% !important;
+                transform: rotate(0deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(3) { /* 狐狸 */
+                top: -8% !important;
+                left: 10% !important;
+                width: 35% !important;
+                transform: rotate(0deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(4) { /* 黑白狗 - 甜甜圈 */
+                top: -9% !important;
+                left: -15% !important;
+                width: 38% !important;
+                transform: rotate(328deg) !important;
+            }
+            
+            /* 左侧角色 */
+            .characters-container a.character-link:nth-child(5) { /* 甜甜圈 - 圣诞树 */
+                top: 13% !important;
+             width: 41% !important;
+           left: -13% !important;
+                transform: rotate(0deg) !important;
+                z-index: 10;
+            }
+            
+            .characters-container a.character-link:nth-child(6) { /* 树 - 小狗 */
+                bottom: 30% !important;
+                left: -10% !important;
+                width: 38% !important;
+                top: 31% !important;
+                transform: rotate(0deg) !important;
+            }
+            
+            /* 右侧角色 */
+            .characters-container a.character-link:nth-child(8) { /* 猪 - 小猪 */
+                top: 27% !important;
+                right: -10% !important;
+                width: 36% !important;
+                transform: rotate(0deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(9) { /* 茄子 - 企鹅 */
+                bottom: 25% !important;
+                right: -15% !important;
+                width: 40% !important;
+                top: auto !important;
+                transform: rotate(0deg) !important;
+            }
+            
+            /* 底部角色 */
+            .characters-container a.character-link:nth-child(7) { /* 小狗 - 青蛙 */
+                bottom: 14% !important;
+                left: -5% !important;
+                width: 36% !important;
+                transform: rotate(15deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(10) { /* 牛角包 - 小兔 */
+                bottom: -7% !important;
+                left: 18% !important;
+                width: 40% !important;
+                z-index: 10;
+                transform: rotate(0deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(11) { /* 兔子 - 小猪 */
+                bottom: -2% !important;
+                right: -7% !important;
+                width: 34% !important;
+                transform: rotate(360deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(12) { /* 青蛙 - 小象 */
+                bottom: -4% !important;
+                left: -8% !important;
+                width: 40% !important;
+                transform: rotate(19deg) !important;
+            }
+            
+            .characters-container a.character-link:nth-child(13) { /* 企鹅 - 小狗 */
+                bottom: 17% !important;
+                left: 75% !important;
+                width: 38% !important;
+                transform: rotate(341deg) !important;
+            }
+        }
+    }
+     /* 小屏手机调整 */
+     @media (max-width: 480px) {
+
+        
+     }
         
 
 
