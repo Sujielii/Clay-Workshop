@@ -279,7 +279,41 @@ h1 br {
             pointer-events: auto;
             z-index: 5;
         }
-         
+        .character-link:hover {
+            transform: scale(1.15);
+            z-index: 20;
+        }
+        
+        .character-link img {
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        
+        .welcome-content {
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .welcome-content h1 {
+            font-family: 'Fascinate Inline', cursive;
+            font-size: 2.6rem;
+            color: #e88f62;
+            margin-top: 15px;
+            text-align: center;
+        }
+         .book-icon {
+            width: 100px;
+            margin: 0 auto 10px;
+        }
+        
+        .book-icon img {
+            width: 100%;
+        }
+
+        /* 移动端响应式调整 - 模拟图片中的布局 */
+        @media (max-width: 768px) {}
+           
+        
 
 
  </style>
