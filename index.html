@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Clay Workshop</title>
+
+</head> 
+ <style>
+  #snowman {
+    position: absolute;
+    top: 2%;
+    right: -10%;
+    width: 19%;
+    transform: scaleX(-1) rotate(45deg);
+    transform-origin: center center;
+}
+
+@font-face {
+    font-family: 'Fascinate Inline';
+    src: url('./fonts/FascinateInline-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Afacad';
+    src: url('./fonts/Afacad-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { font-family: 'Afacad', sans-serif;
+    background-color: #f9f3e8; /* 米色背景 */
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.characters-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 确保角色不会影响点击事件 */
+}
+
+.character {
+    position: absolute;
+    max-width: 15%;
+    transition: transform 0.3s ease;
+    pointer-events: auto; /* 允许角色接收鼠标事件 */
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1)); /* 添加轻微阴影 */
+}
+
+/* 只保留雪人样式 */
+.snowman {
+    top: 2%;
+    right: 10%;
+    width: 12%;
+    z-index: 2;
+    transform: rotate(5deg);
+}
+
+.welcome-content {
+    text-align: center;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    padding: 20px;
+    width: 400px;
+    height: 200px; /* 进一步减小高度 */
+    box-shadow: none;
+    position: relative;
+}
+ </style>
+<body>
+
+</body>
+</html>
