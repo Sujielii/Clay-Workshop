@@ -597,7 +597,92 @@ h1 br {
     </style>
 </head>
 <body>
-    
+    <!-- PC端导航栏 -->
+    <div class="nav-bar" id="pc-nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Crafting Made Easy</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="puppy_tutorial.html" class="nav-link">Gallery</a>
+                <a href="test.html" class="nav-link">Tutorials</a>
+                <a href="lightweight_clay.html" class="nav-link">About Lightweight Clay</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="welcome-container">
+        <div class="characters-container">
+            <!-- 雪人图案 - 水平翻转、旋转45度、调整尺寸、向右移动 -->
+            <a href="puppy_tutorial.html?id=snowman" class="character-link" style="position: fixed;top: -8%; right: -3%; width: 25%;">
+                <img id="snowman" src="images/sonwman.png" alt="Snowman" style="width: 100%; transform: scaleX(-1) rotate(45deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 蛋糕图案 - 倒置并位于雪人的左边 -->
+            <a href="puppy_tutorial.html?id=cake" class="character-link" style="position: absolute; top: 3%; right: 17%; width: 20%;">
+                <img id="cake" src="images/cake.png" alt="Cake" style="width: 100%; transform: rotate(180deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 狐狸图案 - 倒置并位于蛋糕的左边 -->
+            <a href="puppy_tutorial.html?id=fox" class="character-link" style="position: absolute; top: -16%; right: 35.5%; width: 20%;">
+                <img id="fox" src="images/fox.png" alt="Fox" style="width: 100%; transform: rotate(180deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 小狗图案 - 倒置、旋转330度并添加水平镜像，位于狐狸的左边 -->
+            <a href="puppy_tutorial.html?id=bwdog" class="character-link" style="position: absolute; top: -19%; right: 50%; width: 23%;z-index: 8;">
+                <img id="dog" src="images/b&w dog.png" alt="Dog" style="width: 100%; transform: scaleX(-1) rotate(180deg) rotate(350deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增左上角图案 -->
+            <a href="puppy_tutorial.html?id=donut" class="character-link" style="position: absolute; top: -5%; left: 11%; width: 20%;">
+                <img id="donut" src="images/donut.png" alt="Donut" style="width: 100%; transform: rotate(-180deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增左侧图案 -->
+            <a href="puppy_tutorial.html?id=tree" class="character-link" style="position: absolute; top: -9%; left: -6%; width: 22%;">
+                <img id="tree" src="images/tree.png" alt="Tree" style="width: 100%; transform: rotate(3deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增左下角图案 -->
+            <a href="puppy_tutorial.html?id=dog" class="character-link" style="position: absolute; bottom: -3%; left: -3%; width: 22%;">
+                <img id="frog" src="images/dog.png" alt="Frog" style="width: 100%; transform: rotate(-5deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增右侧图案 -->
+            <a href="puppy_tutorial.html?id=pig" class="character-link" style="position: absolute; top: 23%; right: -6%; width: 22%;">
+                <img id="rabbit" src="images/pig.png" alt="Rabbit" style="width: 100%; transform: rotate(0deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增右下角图案 -->
+            <a href="puppy_tutorial.html?id=eggplant" class="character-link" style="position: absolute; bottom: -4%; right: -6%; width: 21%;">
+                <img id="penguin" src="images/eggplant.png" alt="Penguin" style="width: 100%; transform: rotate(-10deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增下方图案 -->
+            <a href="puppy_tutorial.html?id=bread" class="character-link" style="position: absolute; bottom: -18%; left: 31%; width: 35%; z-index: 13;">
+                <img id="bread" src="images/bread.png" alt="Bread" style="width: 100%; transform: rotate(30deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增下方图案 -->
+            <a href="puppy_tutorial.html?id=rabbit" class="character-link" style="position: absolute; bottom: -7%; right:18%; width: 25%; z-index: 12;">
+                <img id="pig" src="images/rabbit.png" alt="Pig" style="width: 100%; transform: rotate(-4deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增中间偏左图案 -->
+            <a href="puppy_tutorial.html?id=frog" class="character-link" style="position: absolute; bottom:  -6%; left: 16%; width: 22%;">
+                <img id="eggplant" src="images/frog.png" alt="Eggplant" style="width: 100%; transform: rotate(0deg); transform-origin: center center;">
+            </a>
+            
+            <!-- 新增中间偏右图案 -->
+            <a href="puppy_tutorial.html?id=penguin" class="character-link" style="position: absolute; bottom: -5%; right: 4%; width: 25%;">
+                <img id="colorful-dog" src="images/penguin.png" alt="Colorful Dog" style="width: 100%; transform: scaleX(-1) rotate(0deg); transform-origin: center center;">
+            </a>
+        </div>
+        
 <body>
 
 </body>
