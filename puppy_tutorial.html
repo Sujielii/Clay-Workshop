@@ -52,3 +52,89 @@
             min-height: 100vh;
             padding: 20px 0;
         }
+
+        /* 卡片容器 */
+        .tutorial-container {
+            min-height: 700px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: visible;
+            transition: transform 0.3s;
+            padding: 15px;
+            margin: 20px;
+            background-image: url('青蛙过程图片+背景+摁钮/Squish-frog.png');
+            background-size: cover;
+        }
+        
+        /* 内容容器 */
+        .tutorial-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            margin: 15px;
+            padding-top: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: calc(100% - 30px);
+            border-radius: 15px;
+        }
+        
+        /* 标题样式 */
+        .tutorial-title {
+            font-family: 'Fascinate Inline', cursive;
+            font-size: 3.2rem;
+            text-align: center;
+            margin: 30px 0 25px;
+            color: #000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+         /* 星级评分 */
+         .rating {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 45px;
+            transform: scale(2.6);
+        }
+        
+        .star {
+            width: 45px;
+            height: 45px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="%23DDDDDD"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .star.filled {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="%23FFE89E"/></svg>');
+        }
+        
+        /* 小狗图片容器 */
+        .puppy-image {
+            width: 200px;
+            height: 217px;
+            display: block;
+        }
+        
+        /* 颜色样本 */
+        .color-samples {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0 25px;
+            width: 90%;
+            padding: 0 20px;
+        }
+        
+        .color-sample {
+            width: 70px;
+            height: 70px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
