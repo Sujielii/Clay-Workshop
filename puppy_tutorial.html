@@ -34,6 +34,7 @@
     font-style: normal;
 }
 
+/* cite: local fonts stored in ./fonts/ */
 @font-face {
     font-family: 'Afacad';
     src: url('./fonts/Afacad-VariableFont_wght.ttf') format('truetype');
@@ -138,3 +139,398 @@
             border-radius: 8px;
         }
 
+        /* 指示点 */
+        .indicator-dots {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #DDD;
+            margin: 0 4px;
+        }
+        
+        .indicator-dot.active {
+            background-color: #FFA07A;
+        }
+        
+        /* 颜色定义 */
+        .color-1 { background-color: #FFF3E2; }
+        .color-2 { background-color: #ECDDC3; }
+        .color-3 { background-color: #DEBCA9; }
+        .color-4 { background-color: #C69C7B; }
+        .color-5 { background-color: #4A3728; }
+        
+        /* 信息部分 */
+        .info-section {
+            margin-top: 15px;
+            text-align: left;
+            width: 100%;
+            line-height: 1.4;
+            font-family: 'Afacad', sans-serif;
+            font-size: 1.1rem;
+        }
+        
+        .info-section p {
+            margin: 6px 0;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        /* 左上角小装饰 */
+        .small-decoration {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 30px;
+            height: 30px;
+            z-index: 5;
+        }
+        
+        /* 左上角返回按钮 */
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 33px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 响应式设计调整 */
+        @media (max-width: 500px) {
+            body {
+                padding: 0;
+                margin: 0;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .tutorial-container {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                border-radius: 0;
+                background-image: url('青蛙过程图片+背景+摁钮/Squish-frog.png');
+                background-size: 100% auto;
+                background-position: top center;
+                background-repeat: no-repeat;
+                background-color: white;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            
+            .tutorial-container .back-button {
+                position: absolute;
+                top: 30px;
+                left: 30px;
+            }
+            
+            .tutorial-content {
+                margin: 0;
+                border-radius: 0;
+                height: 100%;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .tutorial-title {
+                font-size: 2.0rem;
+                margin: 25px 0 20px;
+            }
+            
+            .puppy-image {
+                width: 200px;
+                height: auto;
+            }
+            
+            .color-samples {
+                width: 95%;
+                padding: 0 10px;
+                margin: 20px auto;
+                gap: 10px;
+            }
+            
+            .color-sample {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .info-section {
+                width: 90%;
+                margin: 15px auto;
+                text-align: center;
+                font-size: 1rem;
+            }
+            
+            .info-section p {
+                font-size: 1rem;
+                margin: 4px 0;
+            }
+            
+            .rating {
+                transform: scale(2.2);
+                margin: 34px 0 84px;
+            }
+            
+            .star {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .back-button {
+                top: 34px;
+                left: 41px;
+                width: 36px;
+                height: 36px;
+            }
+            
+            .back-button img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+         /* PC端轮播样式 */
+         @media (min-width: 501px) {
+            body {
+                overflow-x: hidden;
+                background-color: #f5f5f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 0;
+            }
+            
+            /* 导航栏样式 */
+            .nav-bar {
+                width: 100%;
+                height: 70px;
+                background-color: rgba(255, 245, 238, 0.95);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 2000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            }
+            
+            .nav-container {
+                width: 80%;
+                max-width: 1200px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .nav-logo {
+                font-family: 'Fascinate Inline', cursive;
+                font-size: 1.5rem;
+                color: var(--secondary-color);
+                text-decoration: none;
+            }
+            
+            .nav-links {
+                display: flex;
+                gap: 30px;
+            }
+            
+            .nav-link {
+                font-family: 'Afacad', sans-serif;
+                font-size: 1.1rem;
+                color: var(--text-color);
+                text-decoration: none;
+                position: relative;
+                transition: color 0.3s ease;
+            }
+            
+            .nav-link:hover {
+                color: var(--secondary-color);
+            }
+            
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--secondary-color);
+                transition: width 0.3s ease;
+            }
+            
+            .nav-link:hover::after {
+                width: 100%;
+            }
+            
+            .nav-link.active {
+                color: var(--secondary-color);
+                font-weight: 500;
+            }
+            
+            .nav-link.active::after {
+                width: 100%;
+            }
+
+            /* 针对不同教程的图片尺寸调整 */
+            .tutorial-container[data-tutorial-id="dog"] .puppy-image[data-tutorial-id="dog"] {
+                width: 200px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="frog"] .puppy-image[data-tutorial-id="frog"] {
+                width: 200px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="rabbit"] .puppy-image[data-tutorial-id="rabbit"] {
+                width: 220px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="bread"] .puppy-image[data-tutorial-id="bread"] {
+                width: 330px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="penguin"] .puppy-image[data-tutorial-id="penguin"] {
+                width: 215px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="eggplant"] .puppy-image[data-tutorial-id="eggplant"] {
+                width: 170px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="pig"] .puppy-image[data-tutorial-id="pig"] {
+                width: 230px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="snowman"] .puppy-image[data-tutorial-id="snowman"] {
+                width: 230px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="cake"] .puppy-image[data-tutorial-id="cake"] {
+                width: 200px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="fox"] .puppy-image[data-tutorial-id="fox"] {
+                width: 185px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="bwdog"] .puppy-image[data-tutorial-id="bwdog"] {
+                width: 175px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="donut"] .puppy-image[data-tutorial-id="donut"] {
+                width: 205px;
+                height: 217px;
+            }
+            
+            .tutorial-container[data-tutorial-id="tree"] .puppy-image[data-tutorial-id="tree"] {
+                width: 167px;
+                height: 270px;
+            }
+            
+            .color-samples {
+                gap: 10px;
+                margin: 15px 0;
+            }
+            
+            .color-sample {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .info-section {
+                margin-top: 8px;
+                font-size: 0.9rem;
+            }
+            
+            .info-section p {
+                font-size: 0.9rem;
+                margin: 4px 0;
+            }
+             /* 恢复被删除的重要样式 */
+             .rating {
+                transform: scale(1.8);
+                margin: 15px 0 25px;
+            }
+            
+            .star {
+                width: 30px;
+                height: 30px;
+                margin: 0 3px;
+            }
+              
+            .back-button {
+                top: 20px;
+                left: 20px;
+                display: none; /* 在PC端隐藏返回按钮，因为已有导航栏 */
+            }
+            
+            #pc-back-button {
+                display: none; /* PC端不显示返回按钮 */
+            }
+            
+            .back-button img {
+                width: 29px;
+                height: 30px;
+            }
+            
+            /* 去除PC端卡片内容区域的半透明背景 */
+            .tutorial-content {
+                background-color: transparent;
+            }
+        }
+        
+    </style>
+<body>
+<!-- PC端导航栏 -->
+<div class="nav-bar" id="pc-nav-bar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Crafting Made Easy</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="puppy_tutorial.html" class="nav-link active">Gallery</a>
+            <a href="test.html" class="nav-link">Tutorials</a>
+            <a href="lightweight_clay.html" class="nav-link">About Lightweight Clay</a>
+        </div>
+    </div>
+</div>  
+</body>
