@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Afacad:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- cite: https://swiperjs.com/ -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper.min.css" />
 
     <!-- cite: https://swiperjs.com/get-started -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
     <!-- cite: local tutorial content file -->
-    <script src="js/tutorial-data.js"></script>
+    <script src="tutorial-data.js"></script>
   </head>
     <style>
         :root {
@@ -733,7 +733,756 @@
             }
         }
     </style>
-    <script> </script>
+    <script>
+        // 全局变量存储每个教程的当前步骤
+        window.tutorialSteps = {};
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 调试：输出完整URL和所有参数
+            console.log('当前页面URL:', window.location.href);
+            const urlParams = new URLSearchParams(window.location.search);
+            const allParams = {};
+            urlParams.forEach((value, key) => {
+                allParams[key] = value;
+            });
+            console.log('URL参数:', allParams);
+            
+            // 同时支持character和id参数，优先使用character
+            const tutorialId = urlParams.get('character') || urlParams.get('id') || 'dog';
+            
+            console.log('从URL获取的教程ID:', tutorialId);
+            
+            // 设置初始教程ID
+            window.currentTutorialId = tutorialId;
+            
+            // 获取URL参数中的step
+            const stepParam = urlParams.get('step');
+            if (stepParam !== null) {
+                // 为当前教程设置初始步骤
+                window.tutorialSteps[tutorialId] = parseInt(stepParam);
+            }
+            
+            // 根据屏幕宽度判断初始化哪种视图
+            if (window.innerWidth <= 500) {
+                initMobileView(tutorialId);
+            } else {
+                initPCView(tutorialId);
+                
+                // 在PC视图初始化后，再次确认是否滑动到正确的卡片
+                setTimeout(() => {
+                    ensureCorrectCardIsActive(tutorialId);
+                }, 500);
+            }
+            
+            // 窗口大小变化时自动切换视图
+            let lastWidth = window.innerWidth;
+            window.addEventListener('resize', function() {
+                const currentWidth = window.innerWidth;
+                
+                // 只有当跨越临界值时才切换视图
+                if ((lastWidth <= 500 && currentWidth > 500) || 
+                    (lastWidth > 500 && currentWidth <= 500)) {
+                    if (currentWidth <= 500) {
+                        initMobileView(window.currentTutorialId);
+                    } else {
+                        initPCView(window.currentTutorialId);
+                        
+                        // 在PC视图初始化后，再次确认是否滑动到正确的卡片
+                        setTimeout(() => {
+                            ensureCorrectCardIsActive(window.currentTutorialId);
+                        }, 500);
+                    }
+                    lastWidth = currentWidth;
+                }
+            });
+        });
+        
+        // 确保正确的卡片是活动的
+        function ensureCorrectCardIsActive(targetTutorialId) {
+            console.log('确保正确的卡片处于活动状态, 目标ID:', targetTutorialId);
+            
+            // 检查当前活动的卡片
+            const activeSlide = document.querySelector('.swiper-slide-active');
+            if (!activeSlide || !activeSlide.dataset.tutorialId) {
+                console.error('找不到活动的轮播项');
+                return;
+            }
+            
+            const activeId = activeSlide.dataset.tutorialId;
+            if (activeId === targetTutorialId) {
+                console.log('当前活动卡片已正确设置为:', activeId);
+                return;
+            }
+            
+            console.warn('当前活动卡片不是目标卡片, 当前:', activeId, '目标:', targetTutorialId);
+            
+            // 查找目标卡片的索引
+            const tutorials = Object.keys(tutorialData);
+            const targetIndex = tutorials.indexOf(targetTutorialId);
+            
+            if (targetIndex < 0) {
+                console.error('找不到目标教程ID:', targetTutorialId);
+                return;
+            }
+            
+            // 获取swiper实例
+            const swiperInstance = document.querySelector('.swiper-container')?.swiper;
+            if (!swiperInstance) {
+                console.error('找不到swiper实例');
+                return;
+            }
+            
+            // 滑动到目标位置
+            console.log('滑动到索引:', targetIndex);
+            swiperInstance.slideTo(targetIndex, 300);
+        }
+        
+        // 初始化PC端视图
+        function initPCView(tutorialId) {
+            console.log('初始化PC端视图，教程ID:', tutorialId);
+            
+            // 创建swiper容器
+            const swiperContainer = document.createElement('div');
+            swiperContainer.className = 'swiper-container';
+            
+            const swiperWrapper = document.createElement('div');
+            swiperWrapper.className = 'swiper-wrapper';
+            
+            // 获取所有教程数据
+            console.log("可用教程数据:", Object.keys(tutorialData));
+            
+            const tutorials = Object.keys(tutorialData);
+            
+            // 计算当前角色在列表中的索引
+            let currentIndex = 0;
+            if (tutorials.includes(tutorialId)) {
+                currentIndex = tutorials.indexOf(tutorialId);
+                console.log("PC端 - 当前教程ID:", tutorialId, "索引:", currentIndex);
+            } else {
+                console.warn("未找到教程ID:", tutorialId, "将使用默认索引0");
+            }
+            
+            // 创建所有教程卡片
+            tutorials.forEach((id, index) => {
+                const tutorial = tutorialData[id];
+                
+                // 创建swiper滑块
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'swiper-slide';
+                slideDiv.dataset.tutorialId = id; // 添加数据属性以便跟踪
+                
+                const container = createTutorialContainer(tutorial, id);
+                container.className = 'tutorial-container' + (index === currentIndex ? ' active' : '');
+                if (tutorial.bgImage) {
+                    container.style.backgroundImage = `url('${tutorial.bgImage}')`;
+                    container.style.backgroundSize = '100% 100%';
+                }
+                
+                slideDiv.appendChild(container);
+                swiperWrapper.appendChild(slideDiv);
+            });
+            
+            // 添加分页器
+            const paginationDiv = document.createElement('div');
+            paginationDiv.className = 'swiper-pagination';
+            
+            // 组装swiper容器
+            swiperContainer.appendChild(swiperWrapper);
+            swiperContainer.appendChild(paginationDiv);
+            
+            // 获取或创建PC端容器
+            let pcContainer = document.querySelector('.pc-container');
+            if (!pcContainer) {
+                pcContainer = document.createElement('div');
+                pcContainer.className = 'pc-container';
+                pcContainer.style.display = 'none';
+                document.body.appendChild(pcContainer);
+            }
+            
+            // PC端不再需要返回按钮，因为有导航栏
+            // 清空PC容器内容
+            pcContainer.innerHTML = '';
+            pcContainer.appendChild(swiperContainer);
+            
+            console.log('初始化Swiper，当前索引:', currentIndex, '教程ID:', tutorialId);
+            
+            // 初始化Swiper
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 3,
+                spaceBetween: 0,
+                centeredSlides: true,
+                loop: false, // 禁用循环可能会让初始索引更准确
+                initialSlide: currentIndex, // 设置初始显示的卡片
+                speed: 0, // 禁用初始化动画
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: false,
+                },
+                effect: 'coverflow',
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: false,
+                },
+                // 添加响应式设置
+                breakpoints: {
+                    // 窄屏设备
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 10
+                    },
+                    // 中等屏幕
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 15
+                    },
+                    // 宽屏设备
+                    1400: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                    }
+                },
+                on: {
+                    init: function() {
+                        console.log('Swiper初始化完成，当前活动索引:', this.activeIndex, '实际索引:', this.realIndex);
+                        console.log('初始化时设置的索引:', currentIndex, '教程ID:', tutorialId);
+                        // 初始化完成后恢复正常切换速度
+                        setTimeout(() => {
+                            this.params.speed = 300;
+                        }, 100);
+                        
+                        // 确认当前活动的教程ID
+                        const activeSlide = document.querySelector('.swiper-slide-active');
+                        if (activeSlide && activeSlide.dataset.tutorialId) {
+                            const activeId = activeSlide.dataset.tutorialId;
+                            console.log('初始化后活动的教程ID:', activeId, 
+                                        '是否与期望一致:', activeId === tutorialId);
+                            
+                            if (activeId !== tutorialId) {
+                                console.warn('初始化后的活动卡片与期望不符，尝试手动滑动到正确位置');
+                                // 尝试手动滑动到正确的索引
+                                const targetIndex = tutorials.indexOf(tutorialId);
+                                if (targetIndex >= 0) {
+                                    this.slideTo(targetIndex, 0);
+                                    console.log('已滑动到索引:', targetIndex);
+                                }
+                            }
+                        }
+                    },
+                    slideChange: function() {
+                        // 当轮播切换时，更新卡片激活状态
+                        const slides = document.querySelectorAll('.tutorial-container');
+                        slides.forEach(slide => slide.classList.remove('active'));
+                        const activeSlide = document.querySelector('.swiper-slide-active .tutorial-container');
+                        if (activeSlide) {
+                            activeSlide.classList.add('active');
+                            
+                            // 获取当前激活的轮播项
+                            const activeSwiper = document.querySelector('.swiper-slide-active');
+                            
+                            if (activeSwiper && activeSwiper.dataset.tutorialId) {
+                                // 更新当前教程ID
+                                window.currentTutorialId = activeSwiper.dataset.tutorialId;
+                                console.log('当前轮播切换到:', window.currentTutorialId);
+                                
+                                // 获取之前选择的步骤或默认为0
+                                const currentStep = window.tutorialSteps[window.currentTutorialId] || 0;
+                                
+                                // 更新当前卡片的指示点
+                                if (activeSlide) {
+                                    const dotsContainer = activeSlide.querySelector('.indicator-dots');
+                                    if (dotsContainer) {
+                                        const dots = dotsContainer.querySelectorAll('.indicator-dot');
+                                        dots.forEach((dot, i) => {
+                                            if (i === currentStep) {
+                                                dot.classList.add('active');
+                                            } else {
+                                                dot.classList.remove('active');
+                                            }
+                                        });
+                                        console.log(`PC端更新卡片指示点，活动点: ${currentStep}`);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 显示PC端容器
+            pcContainer.style.display = 'block';
+        }
+        
+        // 初始化移动端视图
+        function initMobileView(tutorialId) {
+            // 检查有效的教程ID
+            if (!tutorialData[tutorialId]) {
+                console.error('未找到教程数据:', tutorialId, '将使用默认值');
+                tutorialId = 'dog'; // 使用默认值
+            } else {
+                console.log('初始化移动端视图，教程ID:', tutorialId);
+            }
+            
+            // 创建移动端轮播
+            const mobileContainer = document.querySelector('.mobile-container') || document.createElement('div');
+            mobileContainer.className = 'mobile-container';
+            mobileContainer.style.width = '100vw';
+            mobileContainer.style.height = '100vh';
+            mobileContainer.style.overflow = 'hidden';
+            mobileContainer.style.position = 'relative';
+            
+            // 创建轮播结构
+            const mobileCarousel = document.createElement('div');
+            mobileCarousel.className = 'mobile-carousel';
+            
+            const mobileWrapper = document.createElement('div');
+            mobileWrapper.className = 'mobile-wrapper';
+            
+            // 获取所有教程数据
+            const tutorials = Object.keys(tutorialData);
+            console.log('所有可用教程:', tutorials);
+            
+            // 找到当前教程的索引
+            let currentIndex = tutorials.indexOf(tutorialId);
+            if (currentIndex === -1) {
+                console.error('未找到教程ID:', tutorialId);
+                currentIndex = 0; // 使用第一个作为默认值
+            }
+            console.log('当前教程索引:', currentIndex);
+            
+            // 创建所有教程卡片
+            tutorials.forEach((id, index) => {
+                const tutorial = tutorialData[id];
+                const container = createTutorialContainer(tutorial, id);
+                
+                // 设置卡片样式
+                container.style.width = '100vw';
+                container.style.minWidth = '100vw';
+                container.style.flexShrink = '0';
+                container.dataset.index = index;
+                
+                // 设置卡片背景
+                if (tutorial.bgImage) {
+                    container.style.backgroundImage = `url('${tutorial.bgImage}')`;
+                    container.style.backgroundSize = '100% 100%';
+                    container.style.backgroundPosition = 'center';
+                    container.style.backgroundRepeat = 'no-repeat';
+                }
+                
+                mobileWrapper.appendChild(container);
+            });
+            
+            // 组装轮播
+            mobileCarousel.appendChild(mobileWrapper);
+            mobileContainer.innerHTML = '';
+            mobileContainer.appendChild(mobileCarousel);
+            
+            // 将容器添加到文档
+            if (!document.body.contains(mobileContainer)) {
+                document.body.appendChild(mobileContainer);
+            }
+            
+            // 隐藏PC端容器
+            const pcContainer = document.querySelector('.pc-container');
+            if (pcContainer) {
+                pcContainer.style.display = 'none';
+            }
+            
+            // 显示移动端容器
+            mobileContainer.style.display = 'block';
+            
+            // 初始化位置
+            mobileWrapper.style.transition = 'none';
+            mobileWrapper.style.transform = `translateX(${-currentIndex * 100}vw)`;
+            
+            // 强制回流
+            void mobileWrapper.offsetWidth;
+            
+            // 恢复过渡动画
+            setTimeout(() => {
+                mobileWrapper.style.transition = 'transform 0.3s ease';
+            }, 100);
+            
+            // 触摸事件处理
+            let startX = 0;
+            let currentX = 0;
+            let isDragging = false;
+            
+            mobileCarousel.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                currentX = startX;
+                isDragging = true;
+                mobileWrapper.style.transition = 'none';
+            }, {passive: true});
+            
+            mobileCarousel.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                currentX = e.touches[0].clientX;
+                const diff = currentX - startX;
+                const baseOffset = -currentIndex * 100;
+                const percent = (diff / window.innerWidth) * 100;
+                
+                // 边界处理
+                if ((currentIndex === 0 && diff > 0) || 
+                    (currentIndex === tutorials.length - 1 && diff < 0)) {
+                    // 边界情况，减少移动距离
+                    mobileWrapper.style.transform = `translateX(${baseOffset + percent * 0.3}vw)`;
+                } else {
+                    mobileWrapper.style.transform = `translateX(${baseOffset + percent}vw)`;
+                }
+            }, {passive: true});
+            
+            mobileCarousel.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const diff = currentX - startX;
+                mobileWrapper.style.transition = 'transform 0.3s ease';
+                
+                // 判断是否切换
+                if (Math.abs(diff) > window.innerWidth * 0.2) {
+                    if (diff > 0 && currentIndex > 0) {
+                        currentIndex--;
+                    } else if (diff < 0 && currentIndex < tutorials.length - 1) {
+                        currentIndex++;
+                    }
+                }
+                
+                // 移动到新位置
+                mobileWrapper.style.transform = `translateX(${-currentIndex * 100}vw)`;
+                
+                // 更新当前教程ID
+                const currentTutorialId = tutorials[currentIndex];
+                window.currentTutorialId = currentTutorialId;
+                console.log(`移动端切换到: ${currentTutorialId}, 索引: ${currentIndex}`);
+                
+                // 获取之前选择的步骤或默认为0
+                const currentStep = window.tutorialSteps[currentTutorialId] || 0;
+                console.log('将使用当前步骤:', currentStep, '步骤存储:', window.tutorialSteps);
+                
+                // 更新所有卡片中的指示点，仅激活当前卡片的正确指示点
+                updateAllCardsDots(mobileWrapper, currentIndex, currentTutorialId, currentStep);
+            });
+            
+            mobileCarousel.addEventListener('touchcancel', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                // 回到当前位置
+                mobileWrapper.style.transition = 'transform 0.3s ease';
+                mobileWrapper.style.transform = `translateX(${-currentIndex * 100}vw)`;
+            });
+            
+            // 更新指示点
+            const currentStep = window.tutorialSteps[tutorialId] || 0;
+            // 初始化时更新所有卡片的指示点
+            updateAllCardsDots(mobileWrapper, currentIndex, tutorialId, currentStep);
+        }
+        
+        // 更新指示点函数
+        function updateIndicators(stepsCount, activeStep) {
+            console.log('调用updateIndicators: activeStep=', activeStep, '默认步骤=', stepsCount);
+            const dotsContainer = document.querySelector('.indicator-dots');
+            if (!dotsContainer) {
+                console.error('找不到.indicator-dots容器');
+                return;
+            }
+            
+            // 优先使用传入的activeStep参数
+            if (activeStep === undefined) {
+                // 尝试从全局变量获取当前教程的步骤
+                const currentTutorialId = window.currentTutorialId || 'dog';
+                if (window.tutorialSteps[currentTutorialId] !== undefined) {
+                    activeStep = window.tutorialSteps[currentTutorialId];
+                } else {
+                    // 否则使用教程数据的steps属性，如果没有则默认为0
+                    const tutorial = tutorialData[currentTutorialId];
+                    activeStep = tutorial && tutorial.steps !== undefined ? tutorial.steps : 0;
+                    // 保存到全局变量
+                    window.tutorialSteps[currentTutorialId] = activeStep;
+                }
+            }
+            
+            // 确保activeStep在有效范围内
+            activeStep = Math.max(0, Math.min(activeStep, 12));
+            console.log('最终使用的activeStep值:', activeStep);
+            
+            // 查看所有可能的indicator-dots容器
+            const allDotsContainers = document.querySelectorAll('.indicator-dots');
+            console.log('找到', allDotsContainers.length, '个.indicator-dots容器');
+            
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < 13; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'indicator-dot' + (i === activeStep ? ' active' : '');
+                dot.dataset.step = i;
+                dotsContainer.appendChild(dot);
+            }
+            
+            // 添加事件处理
+            updateIndicatorEvents(dotsContainer);
+            
+            // 验证是否实际更新了DOM
+            const activeDot = dotsContainer.querySelector('.indicator-dot.active');
+            console.log('更新后的active dot索引:', activeDot ? activeDot.dataset.step : '未找到');
+        }
+        
+        // 为指示器点添加事件处理
+        function updateIndicatorEvents(dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.indicator-dot');
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    // 获取所有指示点
+                    const allDots = document.querySelectorAll('.indicator-dot');
+                    // 移除所有active类
+                    allDots.forEach(d => d.classList.remove('active'));
+                    // 给当前点添加active类
+                    this.classList.add('active');
+                    
+                    // 获取当前步骤
+                    const stepIndex = parseInt(this.dataset.step);
+                    
+                    // 更新全局步骤记录
+                    const currentTutorialId = window.currentTutorialId || 'dog';
+                    window.tutorialSteps[currentTutorialId] = stepIndex;
+                    
+                    // 跳转到test.html并传递参数
+                    window.location.href = `test.html?character=${currentTutorialId}&step=${stepIndex}`;
+                });
+            });
+        }
+        
+        // 新增函数：直接更新特定容器中的指示点
+        function updateContainerDots(dotsContainer, stepsCount, activeStep) {
+            console.log('直接更新容器内的指示点:', stepsCount, activeStep);
+            
+            if (!dotsContainer) {
+                console.error('dotsContainer不存在');
+                return;
+            }
+            
+            // 查找所有指示点
+            const dots = dotsContainer.querySelectorAll('.indicator-dot');
+            console.log('找到', dots.length, '个指示点');
+            
+            // 更新active状态
+            dots.forEach((dot, index) => {
+                if (index === activeStep) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // 验证更新结果
+            const activeDot = dotsContainer.querySelector('.indicator-dot.active');
+            console.log('更新后的active dot索引:', activeDot ? activeDot.dataset.step : '未找到');
+        }
+        
+        function createTutorialContainer(tutorial, tutorialId) {
+            const container = document.createElement('div');
+            container.className = 'tutorial-container';
+            container.dataset.tutorialId = tutorialId; // 添加数据属性到container
+            
+            const content = document.createElement('div');
+            content.className = 'tutorial-content';
+            content.dataset.tutorialId = tutorialId; // 添加数据属性到content
+            
+            // 添加返回按钮
+            const backButton = document.createElement('a');
+            backButton.href = 'index.html';
+            backButton.className = 'back-button';  
+            backButton.innerHTML = '<img src="图案/home.png" alt="返回首页">';
+            
+            // 使用传入的参数作为当前教程ID，而不是全局变量
+            const currentTutorialId = tutorialId || window.currentTutorialId || 'dog';
+            
+            // 添加内容，使标题可点击跳转到test.html
+            content.innerHTML = `
+                <a href="test.html?character=${currentTutorialId}" style="text-decoration: none; color: inherit;">
+                    <h1 class="tutorial-title" id="tutorial-title">${tutorial.title}</h1>
+                </a>
+            <div class="rating">
+                    ${Array(5).fill(0).map((_, i) => 
+                        `<div class="star${i < tutorial.rating ? ' filled' : ''}"></div>`
+                    ).join('')}
+            </div>
+                <img class="puppy-image" src="${tutorial.image}" alt="${tutorial.title}" data-tutorial-id="${tutorialId}">
+                <div class="color-samples">
+                    ${tutorial.colors.map(color => 
+                        `<div class="color-sample" style="background-color: #${color}"></div>`
+                    ).join('')}
+                </div>
+                <div class="indicator-dots">
+                    ${Array(13).fill(0).map((_, i) => 
+                        `<div class="indicator-dot" data-step="${i}"></div>`
+                    ).join('')}
+                </div>
+                <div class="info-section">
+                    <p><strong>Time Required:</strong> ${tutorial.time}</p>
+                    <p><strong>Materials Needed:</strong> ${tutorial.materials}</p>
+                </div>
+            `;
+            
+            container.appendChild(backButton);
+            container.appendChild(content);
+            
+            // 为该容器中的指示器点添加事件处理
+            setTimeout(() => {
+                const dotsContainer = container.querySelector('.indicator-dots');
+                if (dotsContainer) {
+                    // 优先使用全局存储的步骤，如果没有则使用教程数据的steps属性值
+                    const defaultStep = tutorial.steps || 0;
+                    const currentStep = window.tutorialSteps[tutorialId] !== undefined ? 
+                                        window.tutorialSteps[tutorialId] : defaultStep;
+                    
+                    // 如果是首次加载这个教程，将其steps值存入全局变量
+                    if (window.tutorialSteps[tutorialId] === undefined) {
+                        window.tutorialSteps[tutorialId] = defaultStep;
+                    }
+                    
+                    console.log(`初始化卡片 ${tutorialId} 的指示点，默认步骤: ${defaultStep}, 当前步骤: ${currentStep}`);
+                    
+                    // 设置正确的活动点
+                    const dots = dotsContainer.querySelectorAll('.indicator-dot');
+                    dots.forEach((dot, index) => {
+                        if (index === currentStep) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                    
+                    // 添加事件处理
+                    updateIndicatorEvents(dotsContainer);
+                    
+                    // 验证更新结果
+                    const activeDot = dotsContainer.querySelector('.indicator-dot.active');
+                    console.log(`卡片 ${tutorialId} 指示点更新完成，活动点: ${activeDot ? activeDot.dataset.step : '未找到'}`);
+                }
+            }, 0);
+            
+            return container;
+        }
+        
+        function loadTutorialData(tutorialId) {
+            const tutorial = tutorialData[tutorialId];
+            if (!tutorial) {
+                console.error('Tutorial not found:', tutorialId);
+                return;
+            }
+            
+            document.querySelector('.tutorial-title').textContent = tutorial.title;
+            document.title = `${tutorial.title} - 粘土教程`;
+            
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < tutorial.rating) {
+                    star.classList.add('filled');
+                } else {
+                    star.classList.remove('filled');
+                }
+            });
+            
+            const tutorialImage = document.querySelector('.puppy-image');
+            tutorialImage.src = tutorial.image;
+            tutorialImage.alt = tutorial.title;
+            
+            const colorSamples = document.querySelectorAll('.color-sample');
+            tutorial.colors.forEach((color, index) => {
+                if (colorSamples[index]) {
+                    colorSamples[index].style.backgroundColor = `#${color}`;
+                }
+            });
+            
+            document.querySelector('.info-section p:first-child').innerHTML = 
+                `<strong>Time Required:</strong> ${tutorial.time}`;
+            
+            document.querySelector('.info-section p:last-child').innerHTML = 
+                `<strong>Materials Needed:</strong> ${tutorial.materials}`;
+            
+            const dotsContainer = document.querySelector('.indicator-dots');
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < 13; i++) {
+                    const dot = document.createElement('div');
+                    // 优先使用全局存储的步骤，如果没有则使用教程数据的steps属性值
+                    const defaultStep = tutorial.steps || 0;
+                    const currentStep = window.tutorialSteps[tutorialId] !== undefined ? 
+                                        window.tutorialSteps[tutorialId] : defaultStep;
+                    
+                    dot.className = 'indicator-dot' + (i === currentStep ? ' active' : '');
+                    dot.dataset.step = i;
+                    dotsContainer.appendChild(dot);
+                }
+                // 使用updateIndicators初始化事件处理
+                updateIndicatorEvents(dotsContainer);
+            }
+            
+            if (tutorial.bgImage) {
+                document.querySelector('.tutorial-container').style.backgroundImage = 
+                    `url('${tutorial.bgImage}')`;
+            }
+        }
+        
+        // 全新的函数：更新所有卡片的指示点，但只激活当前卡片的正确点
+        function updateAllCardsDots(wrapper, activeIndex, currentTutorialId, activeStep) {
+            console.log('更新所有卡片的指示点 - 当前索引:', activeIndex, '教程ID:', currentTutorialId, '步骤:', activeStep);
+            
+            if (!wrapper) {
+                console.error('轮播容器不存在');
+                return;
+            }
+            
+            // 获取所有卡片容器
+            const cards = wrapper.querySelectorAll('.tutorial-container');
+            console.log('找到', cards.length, '个卡片');
+            
+            // 遍历所有卡片
+            cards.forEach((card, cardIndex) => {
+                const cardId = card.dataset.tutorialId;
+                const isActiveCard = cardIndex === activeIndex;
+                console.log(`处理卡片 ${cardIndex}, ID: ${cardId}, 是否当前卡片: ${isActiveCard}`);
+                
+                // 获取当前卡片的指示点容器
+                const dotsContainer = card.querySelector('.indicator-dots');
+                if (!dotsContainer) {
+                    console.log(`卡片 ${cardIndex} 没有找到指示点容器`);
+                    return;
+                }
+                
+                // 获取当前卡片的默认步骤
+                const tutorial = tutorialData[cardId];
+                if (!tutorial) {
+                    console.log(`卡片 ${cardIndex} 没有对应的教程数据`);
+                    return;
+                }
+                
+                // 获取当前卡片应该设置的活动步骤
+                // 只有当前卡片使用传入的activeStep，其他卡片使用各自保存的步骤
+                const step = isActiveCard ? activeStep : (window.tutorialSteps[cardId] || tutorial.steps);
+                
+                // 更新这个卡片的指示点
+                const dots = dotsContainer.querySelectorAll('.indicator-dot');
+                dots.forEach((dot, i) => {
+                    if (i === step) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                console.log(`卡片 ${cardIndex} 更新完成，活动点: ${step}`);
+            });
+        }
+    </script>
 </head>
 <body>
       
