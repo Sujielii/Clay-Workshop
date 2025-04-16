@@ -14,7 +14,7 @@
     <script src="js/tutorial-data.js"></script>
     <!-- cite: https://swiperjs.com/get-started -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    
+
     <style>
         /* 全局重置 */
         html, body {
@@ -609,4 +609,1615 @@
 
     </style>
   </head>
+
+  <body>
+  <!-- PC端导航栏 -->
+  <div class="nav-bar" id="pc-nav-bar">
+      <div class="nav-container">
+          <a href="index.html" class="nav-logo">Crafting Made Easy</a>
+          <div class="nav-links">
+              <a href="index.html" class="nav-link">Home</a>
+              <a href="puppy_tutorial.html" class="nav-link">Gallery</a>
+              <a href="test.html" class="nav-link active">Tutorials</a>
+              <a href="lightweight_clay.html" class="nav-link">About Lightweight Clay</a>
+          </div>
+      </div>
+  </div>
+
+    <!-- 返回按钮 -->
+    <div class="back-button" id="back-button">
+        <!-- 图标将通过JavaScript动态加载 -->
+                </div>
+                
+    <!-- 移动端容器 - 完全独立结构 -->
+    <div class="mobile-container">
+        <div class="mobile-carousel">
+            <!-- 移动端卡片将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+    <!-- PC端容器 - 完全独立结构 -->
+    <div class="pc-container">
+        
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- PC端轮播卡片将通过JavaScript动态生成 -->
+                </div>
+            <!-- 添加分页器 -->
+            <div class="swiper-pagination"></div>
+            <!-- 添加导航按钮 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+                
+    <!-- 引入Swiper的JavaScript -->
+    <script src="./js/tutorial-data.js">
+
+    </script>
+    <script>
+        //当前卡片索引
+        let currentIndex = 0;
+        
+        //教程数据
+        const initialData = {
+            tutorials: {
+                frog: {
+                    id: "frog",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay frog!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Head",
+                            description: "Roll a piece of green clay into an oval shape to form the frog's head.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1683.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Make the Eyes",
+                            description: "Take two small pieces of green clay and roll them into small balls.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1684.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Attach the Eyes",
+                            description: "Place the two small balls on top of the oval head and gently flatten the contact area.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1686.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Define the Eye Sockets",
+                            description: "Use a rolling tool to press indentations where the frog's eyes will go.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1687.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Shape the Body",
+                            description: "Roll a piece of green clay into a cylinder to form the frog's body.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1688.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Make the Feet",
+                            description: "Take two small pieces of green clay and roll them into balls to create the feet.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1685.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Shape the Legs",
+                            description: "Take two more pieces of green clay and roll them into elongated shapes for legs.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1689.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Assemble the Frog",
+                            description: "Attach the legs and feet to the body, then secure the head on top.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1691.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Add the Face",
+                            description: "Use a fine-tip marker to draw the frog's eyes, mouth, and details.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1692.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay frog is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "青蛙过程图片+背景+摁钮/IMG_1694.png"
+                        }
+                    ],
+                    tip: "To give your frog a livelier look, slightly tilt the eyes or curve the mouth into a cheerful smile. You can also use white clay to add tiny highlights to the eyes for extra charm!",
+                    background: "青蛙过程图片+背景+摁钮/Squish-frog.png",
+                    backButton: {
+                        icon: "青蛙过程图片+背景+摁钮/Polygon 1.png"
+                    }
+                },
+                dog: {
+                    id: "dog",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay dog!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Head",
+                            description: "Take a piece of brown clay and roll it into a smooth ball to form the dog's head.",
+                            image: "棕色狗过程/IMG_1819.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Shape the Body",
+                            description: "Roll a piece of brown clay into an oval shape, making the top slightly narrower and the bottom wider.",
+                            image: "棕色狗过程/IMG_1820.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Add Fur Patterns",
+                            description: "Flatten a small piece of dark brown clay and attach it to the body to create fur markings.",
+                            image: "棕色狗过程/IMG_1821.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Attach the Body Details",
+                            description: "Carefully press the dark brown pattern onto the oval-shaped body to complete its look.",
+                            image: "棕色狗过程/IMG_1822.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Make the Feet",
+                            description: "Roll two small pieces of brown clay into round balls and attach them as the dog's feet.",
+                            image: "棕色狗过程/IMG_1823.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Shape the Hands",
+                            description: "Take two small pieces of light brown clay and roll them into cylinders to form the dog's arms.",
+                            image: "棕色狗过程/IMG_1824.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Make the Nose",
+                            description: "Roll a small piece of dark brown clay into a round shape and attach it to the front of the head.",
+                            image: "棕色狗过程/IMG_1825.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Form the Ears & Tail",
+                            description: "Take three small pieces of dark brown clay, shape them into cones, and use them as the ears and tail.",
+                            image: "棕色狗过程/IMG_1826.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Draw the Face",
+                            description: "Use a fine-tip marker to draw the dog's eyes and facial details.",
+                            image: "棕色狗过程/IMG_1827.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay dog is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "棕色狗过程/IMG_1828.png"
+                        }
+                    ],
+                    tip: "For extra cuteness, use a small rolling tool to create subtle fur textures on the ears and body!",
+                    background: "棕色狗过程/Squish-dog.png",
+                    backButton: {
+                        icon: "棕色狗过程/Polygon 1.png"
+                    }
+                },
+                tree: {
+                    id: "tree",
+                    title: "Follow these simple steps to<br>create your own adorable<br>clay Christmas tree!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Tree Trunk",
+                            description: "Roll a piece of brown clay into a small ball and flatten it slightly to form the tree trunk.",
+                            image: "圣诞树过程/IMG_1629.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Create the Tree Shape",
+                            description: "Take a larger piece of green clay and shape it into a cone for the main body of the Christmas tree.",
+                            image: "圣诞树过程/IMG_1630.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Add Tree Layers",
+                            description: "Roll three small pieces of dark green clay into thin strips.",
+                            image: "圣诞树过程/IMG_1631.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Attach the Layers",
+                            description: "Carefully attach the dark green strips onto the tree body to add texture and dimension.",
+                            image: "圣诞树过程/IMG_1632.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Prepare the Bow",
+                            description: "Flatten a piece of red clay into a long oval shape.",
+                            image: "圣诞树过程/IMG_1633.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Shape the Bow Loops",
+                            description: "Pinch both ends of the red clay inward to form one side of the bow.",
+                            image: "圣诞树过程/IMG_1634.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Complete the Bow",
+                            description: "Repeat the previous step, then join both halves together to create a full bow.",
+                            image: "圣诞树过程/IMG_1635.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Make the Ornaments",
+                            description: "Roll small pieces of yellow and red clay into tiny balls to serve as decorations.",
+                            image: "圣诞树过程/IMG_1638.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Assemble the Christmas Tree",
+                            description: "Attach the tree trunk, bow, and ornaments onto the tree.",
+                            image: "圣诞树过程/IMG_1636.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Use a fine-tip marker to draw a cute face on the Christmas tree. Your clay Christmas tree is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "圣诞树过程/IMG_1637.png"
+                        }
+                    ],
+                    tip: "You can lightly texture the green clay using a rolling tool or a toothpick to create a more natural pine-like effect. For extra festive charm, add tiny white clay dots to mimic snow or use metallic clay for sparkly ornaments!",
+                    background: "圣诞树过程/Squish-tree.png",
+                    backButton: {
+                        icon: "圣诞树过程/Polygon 1.png"
+                    }
+                },
+                donut: {
+                    id: "donut",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay donut!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Dough",
+                            description: "Take a piece of light brown clay, roll it into a ball, and flatten it using a clay pressing board.",
+                            image: "甜甜圈过程/IMG_1550.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Create the Donut Hole",
+                            description: "Use a plastic knife to carefully poke a hole in the center.",
+                            image: "甜甜圈过程/IMG_1549.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Prepare the Icing",
+                            description: "Take a small piece of pink clay, roll it out into a thin flat sheet, and gently press down the edges.",
+                            image: "甜甜圈过程/IMG_1551.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Cut the Icing Shape",
+                            description: "Use a plastic knife to cut out a hole in the center of the pink clay so it fits over the donut.",
+                            image: "甜甜圈过程/IMG_1552.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Apply the Icing",
+                            description: "Carefully place the pink clay on top of the donut, making sure it sits evenly.",
+                            image: "甜甜圈过程/IMG_1553.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Make the Sprinkles",
+                            description: "Take small amounts of dark pink and white clay and roll them into tiny sprinkle-sized pieces.",
+                            image: "甜甜圈过程/IMG_1554.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Decorate the Donut",
+                            description: "Use tweezers to gently attach the sprinkles onto the icing, spacing them evenly.",
+                            image: "甜甜圈过程/IMG_1555.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Create the Legs",
+                            description: "Roll two small pieces of dark brown clay into short cylinders to form the legs.",
+                            image: "甜甜圈过程/IMG_1556.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Attach the Legs",
+                            description: "Press the legs onto the bottom of the donut to complete the character.",
+                            image: "甜甜圈过程/IMG_1557.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay donut is now complete! For a glossy finish, apply a thin layer of varnish and let it sit for about 30 minutes to dry.",
+                            image: "甜甜圈过程/IMG_1559.png"
+                        }
+                    ],
+                    tip: "Want to make your donut even cuter? Try using white pastel powder to create a powdered sugar effect, or experiment with different icing colors like chocolate, blueberry, or matcha!",
+                    background: "甜甜圈过程/Squish-donut.png",
+                    backButton: {
+                        icon: "甜甜圈过程/Polygon 1.png"
+                    }
+                },
+                bwdog: {
+                    id: "bwdog",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay Black & White Dog!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Head",
+                            description: "Roll a piece of white clay into a ball for the head and a smaller oval for the face.",
+                            image: "黑白狗过程/IMG_1712.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Form the Face",
+                            description: "Attach the smaller oval to the side of the round ball to create the dog's face.",
+                            image: "黑白狗过程/IMG_1713.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Make the Body",
+                            description: "Roll a piece of white clay into a cylinder, making the top slightly narrower and the bottom wider to form the body.",
+                            image: "黑白狗过程/IMG_1714.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Shape the Arms",
+                            description: "Take two small pieces of white clay and roll them into short cylinders to create the dog's arms.",
+                            image: "黑白狗过程/IMG_1715.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Prepare the Feet",
+                            description: "Roll two small pieces of white clay into round balls.",
+                            image: "黑白狗过程/IMG_1717.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Shape the Legs",
+                            description: "Gently taper one end of each ball to form the dog's legs.",
+                            image: "黑白狗过程/IMG_1718.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Make the Ears",
+                            description: "Take two pieces of black clay and roll one end slightly thinner to shape the floppy ears.",
+                            image: "黑白狗过程/IMG_1716.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Assemble the Dog",
+                            description: "Attach the legs and arms to the body, then secure the head on top. Finally, add the black ears to the sides of the head.",
+                            image: "黑白狗过程/IMG_1719.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Add Details",
+                            description: "Use a black marker to draw the dog's fur patterns, facial features, and spots.",
+                            image: "黑白狗过程/IMG_1722.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay black & white dog is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "黑白狗过程/IMG_1724.png"
+                        }
+                    ],
+                    tip: "For a more expressive look, experiment with different facial expressions by varying the size and shape of the eyes and mouth. Adding small clay spots can make your dog even more adorable!",
+                    background: "黑白狗过程/Squish-bwdog.png",
+                    backButton: {
+                        icon: "黑白狗过程/Polygon 1.png"
+                    }
+                },
+                fox: {
+                    id: "fox",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay fox!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Head",
+                            description: "Roll a piece of orange clay into a round shape.",
+                            image: "狐狸过程/IMG_1798.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Form the Face",
+                            description: "Take a small piece of white clay, shape it into a triangle, and flatten it.",
+                            image: "狐狸过程/IMG_1799.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Attach the Face",
+                            description: "Press the white clay onto the lower half of the orange head to create the fox's face.",
+                            image: "狐狸过程/IMG_1800.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Make a Nose Indentation",
+                            description: "Use a rolling tool to press a small groove where the orange and white clay meet to place the nose later.",
+                            image: "狐狸过程/IMG_1801.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Shape the Arms",
+                            description: "Roll two small pieces of orange clay into cylinders to create the fox's arms.",
+                            image: "狐狸过程/IMG_1803.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Form the Feet",
+                            description: "Take two small pieces of clay and shape them into round balls for the feet.",
+                            image: "狐狸过程/IMG_1804.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Make the Ears",
+                            description: "Pinch two small pieces of orange clay into triangular shapes for the fox's ears.",
+                            image: "狐狸过程/IMG_1802.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Add the Nose",
+                            description: "Roll a tiny piece of black clay into a ball and place it into the groove you created for the nose.",
+                            image: "狐狸过程/IMG_1806.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Assemble the Fox",
+                            description: "Roll a larger ball of orange clay for the body and attach all the pieces together.",
+                            image: "狐狸过程/IMG_1805.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Use a fine-tip marker to draw eyes on your clay fox. Your fox is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "狐狸过程/IMG_1807.png"
+                        }
+                    ],
+                    tip: "For a more realistic touch, add tiny tufts of white clay inside the ears or give your fox a curled tail for extra cuteness!",
+                    background: "狐狸过程/Squish-fox.png",
+                    backButton: {
+                        icon: "狐狸过程/Polygon 1.png"
+                    }
+                },
+                cake: {
+                    id: "cake",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay cake!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Cake Base",
+                            description: "Roll a piece of clay into a cylinder and gently press it down to flatten.",
+                            image: "蛋糕过程/IMG_1301.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Create Texture",
+                            description: "Use a toothpick to press fine lines onto the surface, mimicking a real cake's texture.",
+                            image: "蛋糕过程/IMG_1302.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Form the Cake Shape",
+                            description: "Gently pinch the bottom of the clay to shape it into a trapezoid.",
+                            image: "蛋糕过程/IMG_1303.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Prepare the Cream Layer",
+                            description: "Take some off-white clay and flatten it with your fingers.",
+                            image: "蛋糕过程/IMG_1304.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Roll Out the Cream",
+                            description: "Use a round stick or rolling tool to gently push forward, thinning the clay.",
+                            image: "蛋糕过程/IMG_1305.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Cover the Cake Base",
+                            description: "Flip the flattened cream layer over and carefully drape it on top of the trapezoid-shaped cake.",
+                            image: "蛋糕过程/IMG_1306.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Make Space for the Strawberry",
+                            description: "Use a round stick to press a small indentation in the top, where the strawberry will sit.",
+                            image: "蛋糕过程/IMG_1309.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Create the Strawberry",
+                            description: "Roll a small piece of red clay into a teardrop shape and use a toothpick to poke tiny dots.",
+                            image: "蛋糕过程/IMG_1307.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Attach the Strawberry",
+                            description: "Use glue to securely place the strawberry on top of the cake.",
+                            image: "蛋糕过程/IMG_1308.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay cake is now complete! For a glossy finish, apply a thin layer of varnish and let it sit for about 30 minutes to dry.",
+                            image: "蛋糕过程/IMG_1316.png"
+                        }
+                    ],
+                    tip: "You can also add tiny decorative elements like sprinkles or extra whipped cream to make your cake even cuter!",
+                    background: "蛋糕过程/Squish-cake.png",
+                    backButton: {
+                        icon: "蛋糕过程/Polygon 1.png"
+                    }
+                },
+                snowman: {
+                    id: "snowman",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay snowman!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Snowman's Body",
+                            description: "Roll two pieces of white clay into balls—one slightly larger for the body and a smaller one for the head.",
+                            image: "雪人过程/IMG_1600.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Create the Nose Slot",
+                            description: "Use a rolling tool to press a small indentation into the smaller white clay where the nose will be placed later.",
+                            image: "雪人过程/IMG_1599.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Prepare the Hat and Scarf",
+                            description: "Take two pieces of green clay, one slightly bigger than the other.",
+                            image: "雪人过程/IMG_1585.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Make the Hat",
+                            description: "Flatten the larger green clay and pinch both ends together to shape it into a winter hat. Roll the smaller piece into a thin, long rectangle to form the scarf.",
+                            image: "雪人过程/IMG_1587.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Add a Pom-Pom",
+                            description: "Take a tiny piece of green clay and attach it to the tip of the hat to create a pom-pom.",
+                            image: "雪人过程/IMG_1588.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Shape the Arms",
+                            description: "Roll brown clay into two thin cylinders for the arms. Take one of them and use a plastic knife to cut it into three smaller pieces.",
+                            image: "雪人过程/IMG_1590.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Assemble the Branch Arms",
+                            description: "Attach the three small brown clay pieces to one end of the uncut brown cylinder to resemble a twig. Repeat the process to make the other arm.",
+                            image: "雪人过程/IMG_1592.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Make the Carrot Nose",
+                            description: "Take a small piece of orange clay, roll it into a cone shape, and slightly curve it to resemble a carrot.",
+                            image: "雪人过程/IMG_1589.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Assemble the Snowman",
+                            description: "Stack the head onto the body, attach the hat and scarf, insert the nose into the slot, and press the arms onto the sides.",
+                            image: "雪人过程/IMG_1593.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay snowman is now complete! Use a fine-tip marker to draw a cute face. For extra details, you can add tiny black clay dots for buttons or a smile.",
+                            image: "雪人过程/IMG_1598.png"
+                        }
+                    ],
+                    tip: "Want to make your snowman even more festive? Try adding glitter powder to create a frosty effect or give your snowman tiny clay mittens for a cozy winter look!",
+                    background: "雪人过程/Squish-snowman.png",
+                    backButton: {
+                        icon: "雪人过程/Polygon 1.png"
+                    }
+                },
+                pig: {
+                    id: "pig",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay pig!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Head",
+                            description: "Take a piece of pink clay and roll it into a smooth ball to form the pig's head.",
+                            image: "小猪过程/IMG_1829.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Make the Snout",
+                            description: "Roll a small piece of dark pink clay into a ball, then flatten it to create the pig's snout.",
+                            image: "小猪过程/IMG_1830.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Attach the Snout",
+                            description: "Carefully press the dark pink snout onto the center of the head.",
+                            image: "小猪过程/IMG_1831.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Shape the Body",
+                            description: "Roll a piece of pink clay into a cylinder, then gently press it to create a slightly tilted body shape.",
+                            image: "小猪过程/IMG_1832.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Make the Ears",
+                            description: "Take two small pieces of pink clay, roll them into balls, then flatten them into triangles to form the ears.",
+                            image: "小猪过程/IMG_1833.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Shape the Feet",
+                            description: "Roll two small pieces of pink clay into round balls to make the pig's feet.",
+                            image: "小猪过程/IMG_1834.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Create the Hands",
+                            description: "Roll two small pieces of pink clay into cone shapes to form the pig's hands.",
+                            image: "小猪过程/IMG_1835.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Assemble the Pig",
+                            description: "Attach the ears, feet, and hands to the body, making sure they are positioned properly.",
+                            image: "小猪过程/IMG_1837.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Draw the Face",
+                            description: "Use a fine-tip marker to draw the pig's eyes and add small nostrils on the snout.",
+                            image: "小猪过程/IMG_1838.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay pig is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "小猪过程/IMG_1839.png"
+                        }
+                    ],
+                    tip: "For extra charm, add a curly tail by rolling a thin strip of pink clay and attaching it to the back of the pig!",
+                    background: "小猪过程/Squish-pig.png",
+                    backButton: {
+                        icon: "小猪过程/Polygon 1.png"
+                    }
+                },
+                penguin: {
+                    id: "penguin",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay penguin!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Head and Body",
+                            description: "Roll one piece of white clay into a ball for the head and another into an oval for the body.",
+                            image: "企鹅过程/IMG_1808.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Flatten the Black Clay",
+                            description: "Take a piece of black clay and flatten it with your hands or a rolling tool.",
+                            image: "企鹅过程/IMG_1809.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Create the Head Markings",
+                            description: "Use a rolling tool to carve out the penguin's head markings on the black clay and remove any excess.",
+                            image: "企鹅过程/IMG_1810.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Attach the Head Markings",
+                            description: "Carefully place the black clay on the white ball to form the penguin's head pattern.",
+                            image: "企鹅过程/IMG_1811.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Cover the Body",
+                            description: "Flatten another piece of black clay and wrap it around the oval-shaped white clay, blending the edges smoothly.",
+                            image: "企鹅过程/IMG_1812.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Shape the Wings",
+                            description: "Roll two small pieces of black clay into cylinders and slightly flatten them to form the penguin's wings.",
+                            image: "企鹅过程/IMG_1814.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Make the Feet",
+                            description: "Take two small pieces of orange clay, roll them into balls, and slightly flatten them to create the feet.",
+                            image: "企鹅过程/IMG_1818.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Create the Beak",
+                            description: "Roll a small piece of orange clay into a triangle shape for the beak.",
+                            image: "企鹅过程/IMG_1817.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Assemble the Penguin",
+                            description: "Attach the wings, feet, and beak to the body, adjusting their positions for balance.",
+                            image: "企鹅过程/IMG_1815.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Use a fine-tip marker to draw the penguin's eyes. Your clay penguin is now complete! For a glossy finish, apply a thin layer of varnish and let it dry for about 30 minutes.",
+                            image: "企鹅过程/IMG_1816.png"
+                        }
+                    ],
+                    tip: "For extra cuteness, add a tiny scarf or earmuffs using colored clay to make your penguin look cozy and festive!",
+                    background: "企鹅过程/Squish-penguin.png"
+                },
+                eggplant: {
+                    id: "eggplant",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay eggplant!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Prepare the Green Clay",
+                            description: "Take a small piece of green clay to create the eggplant's leafy top.",
+                            image: "茄子过程/IMG_1453.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Shape the Leaves",
+                            description: "Use a rolling tool to press gentle vein-like textures onto the green clay, mimicking real eggplant leaves.",
+                            image: "茄子过程/IMG_1454.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Prepare the Purple Clay",
+                            description: "Take a piece of purple clay to form the body of the eggplant.",
+                            image: "茄子过程/IMG_1445.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Shape the Eggplant Body",
+                            description: "Roll the purple clay into an oval shape, making the top slightly wider and the bottom narrower.",
+                            image: "茄子过程/IMG_1444.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Attach the Leaves",
+                            description: "Flip the green leaf piece over and carefully press it onto the top of the eggplant body.",
+                            image: "茄子过程/IMG_1455 1.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Create the Eggplant Stem",
+                            description: "Take a tiny piece of green clay and roll it into a thin, elongated cylinder to form the stem.",
+                            image: "茄子过程/IMG_1447.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Make a Groove for the Stem",
+                            description: "Use a rolling tool to press a small indentation at the top of the eggplant where the stem will be attached.",
+                            image: "茄子过程/IMG_1448.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Attach the Stem",
+                            description: "Apply a small amount of glue and carefully place the green stem into the indentation.",
+                            image: "茄子过程/IMG_1449.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Draw the Face (Optional)",
+                            description: "Use a fine-tip marker to draw a cute face on the eggplant body to give it character.",
+                            image: "茄子过程/IMG_1450.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay eggplant is now complete! For a glossy finish, apply a thin layer of varnish and let it sit for about 30 minutes to dry.",
+                            image: "茄子过程/IMG_1452.png"
+                        }
+                    ],
+                    tip: "You can also add tiny details to make your clay eggplant even cuter! Try shaping tiny clay dots to create realistic texture, or add a little curl to the stem for extra charm. For a fun twist, mix different shades of purple for a more natural look!",
+                    background: "茄子过程/Squish-eggplant.png"
+                },
+                rabbit: {
+                    id: "rabbit",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay rabbit!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Shape the Bunny's Head",
+                            description: "Roll a piece of brown clay into a ball and gently press one end to create a slight indentation for the face.",
+                            image: "兔子过程/IMG_1654.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Make the Arms",
+                            description: "Take four small pieces of brown clay. Roll two into short oval shapes for the arms.",
+                            image: "兔子过程/IMG_1656.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Shape the Ears",
+                            description: "Flatten the remaining two small brown pieces to form the bunny's ears.",
+                            image: "兔子过程/IMG_1655.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Make the Feet",
+                            description: "Roll two small balls of brown clay for the feet.",
+                            image: "兔子过程/IMG_1657.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Assemble the Body",
+                            description: "Shape a larger oval piece of brown clay for the bunny's body, then carefully attach the head, arms, ears, and feet together.",
+                            image: "兔子过程/IMG_1658.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Add the Nose",
+                            description: "Take a tiny piece of pink clay, shape it into a triangle, and place it in the center of the bunny's face.",
+                            image: "兔子过程/IMG_1661.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Create the Hat",
+                            description: "Roll a red piece of clay into a triangle and flatten it slightly to form a Santa hat.",
+                            image: "兔子过程/IMG_1659.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Add White Details",
+                            description: "Roll a thin strip of white clay for the hat's base and shape a small ball for the tip. Attach both to complete the Santa hat.",
+                            image: "兔子过程/IMG_1660.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Attach the Features",
+                            description: "Press a small groove for the nose, then attach the pink nose and Santa hat securely.",
+                            image: "兔子过程/IMG_1662.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Use a fine-tip marker to draw the bunny's eyes and complete its cute look. Your clay bunny is now ready! For a glossy finish, apply a thin layer of varnish and let it dry for 30 minutes.",
+                            image: "兔子过程/IMG_1665.png"
+                        }
+                    ],
+                    tip: "You can slightly bend the ears to give your bunny a livelier expression. Adding a touch of pink to the cheeks with pastels or a fine-tip marker will make it even cuter!",
+                    background: "兔子过程/Squish-rabbit.png"
+                },
+                bread: {
+                    id: "bread",
+                    title: "Follow these simple steps<br>to create your own<br>adorable clay croissant!",
+                    steps: [
+                        {
+                            number: 1,
+                            title: "Prepare the Dough",
+                            description: "Take a piece of light brown clay and roll it into a cylinder.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1488.png"
+                        },
+                        {
+                            number: 2,
+                            title: "Shape the Crescent",
+                            description: "Gently taper both ends of the clay and bend it into a crescent shape.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1489.png"
+                        },
+                        {
+                            number: 3,
+                            title: "Create the Croissant Layers",
+                            description: "Use a plastic knife to roll back and forth over the surface, mimicking the layered texture of a real croissant.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1494.png"
+                        },
+                        {
+                            number: 4,
+                            title: "Refine the Crescent Shape",
+                            description: "Bend the croissant again to enhance the curved shape.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1509.png"
+                        },
+                        {
+                            number: 5,
+                            title: "Add Facial Features (Optional)",
+                            description: "Use a fine-tip marker to draw a cute face on the croissant.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1499.png"
+                        },
+                        {
+                            number: 6,
+                            title: "Create Indentations",
+                            description: "Use a rolling tool to gently press a small groove at the bottom of the croissant where the legs will be attached.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1500.png"
+                        },
+                        {
+                            number: 7,
+                            title: "Prepare the Legs",
+                            description: "Take a small piece of black clay and divide it into four equal parts—two for the feet and two for the legs. Roll two pieces into small spheres and the other two into short cylinders.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1496.png"
+                        },
+                        {
+                            number: 8,
+                            title: "Assemble the Legs",
+                            description: "Attach each cylinder to a sphere to form the croissant's feet.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1498.png"
+                        },
+                        {
+                            number: 9,
+                            title: "Attach the Legs to the Croissant",
+                            description: "Flip the croissant over and carefully press the legs into the grooves at the bottom.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1501.png"
+                        },
+                        {
+                            number: 10,
+                            title: "Final Touches!",
+                            description: "Your clay croissant is now complete! For a glossy finish, apply a thin layer of varnish and let it sit for about 30 minutes to dry.",
+                            image: "牛角包过程图片+背景+摁钮/IMG_1508.png"
+                        }
+                    ],
+                    tip: "Want to make your croissant even more delicious-looking? Try adding tiny clay chocolate chips, a dusting of white pastel powder for a 'flour' effect, or sculpting a mini coffee cup to place beside it!",
+                    background: "牛角包过程图片+背景+摁钮/Squish-bread.png"
+                }
+            }
+        };
+        
+        //获取URL参数
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        //根据URL参数获取教程数据
+        function getTutorialData() {
+            //检查是否有character参数，默认为青蛙
+            let characterType = getUrlParam('character') || getUrlParam('type') || 'frog';
+            
+            console.log('加载角色:', characterType, '的教程数据');
+            
+            //查找对应类型的教程，如果没有则使用青蛙
+            const tutorial = initialData.tutorials[characterType] || initialData.tutorials.frog;
+            return tutorial;
+        }
+        
+        //生成移动端教程卡片内容 - 独立函数
+        function generateMobileCardContent(card, tutorial) {
+            // 获取卡片教程ID
+            const tutorialId = card.getAttribute('data-tutorial-id');
+            console.log('创建移动端卡片内容:', tutorialId);
+            
+            // 设置卡片背景
+            if (tutorial.background) {
+                card.style.backgroundImage = `url('${tutorial.background}')`;
+                card.style.backgroundSize = 'cover';
+                card.style.backgroundPosition = 'center';
+            }
+            
+            // 获取卡片内容容器
+            const contentDiv = card.querySelector('.mobile-card-content');
+            if (!contentDiv) {
+                console.error('卡片内容容器不存在:', tutorialId);
+                return;
+            }
+            
+            // 创建标题
+            const titleElement = document.createElement('h1');
+            titleElement.innerHTML = tutorial.title;
+            contentDiv.appendChild(titleElement);
+            
+            // 创建步骤容器
+            const stepsContainer = document.createElement('div');
+            stepsContainer.className = 'mobile-steps-container';
+            
+            // 创建左右两列
+            const leftColumn = document.createElement('div');
+            leftColumn.className = 'mobile-steps-column';
+            
+            const rightColumn = document.createElement('div');
+            rightColumn.className = 'mobile-steps-column';
+            
+            // 添加步骤
+            tutorial.steps.forEach((step, index) => {
+                // 创建步骤元素
+                const stepElement = document.createElement('div');
+                stepElement.className = 'mobile-step';
+                
+                // 创建步骤图片
+                const stepImg = document.createElement('img');
+                stepImg.src = step.image;
+                stepImg.className = 'mobile-step-img';
+                stepImg.alt = step.title;
+                
+                // 创建步骤内容区
+                const stepContent = document.createElement('div');
+                stepContent.className = 'mobile-step-content';
+                
+                // 创建步骤标题和描述
+                const stepTitle = document.createElement('div');
+                stepTitle.className = 'mobile-step-title';
+                stepTitle.textContent = `${step.number}. ${step.title}`;
+                
+                const stepDesc = document.createElement('div');
+                stepDesc.className = 'mobile-step-description';
+                stepDesc.textContent = step.description;
+                
+                // 组装步骤内容
+                stepContent.appendChild(stepTitle);
+                stepContent.appendChild(stepDesc);
+                
+                stepElement.appendChild(stepImg);
+                stepElement.appendChild(stepContent);
+                
+                // 步骤1-5放在左列，6-10放在右列
+                if (index < 5) {
+                    leftColumn.appendChild(stepElement);
+                } else {
+                    rightColumn.appendChild(stepElement);
+                }
+            });
+            
+            // 将两列添加到步骤容器
+            stepsContainer.appendChild(leftColumn);
+            stepsContainer.appendChild(rightColumn);
+            contentDiv.appendChild(stepsContainer);
+            
+            // 添加提示
+            if (tutorial.tip) {
+            const tipElement = document.createElement('div');
+            tipElement.className = 'mobile-tip';
+            
+            const emojiSpan = document.createElement('span');
+            emojiSpan.className = 'mobile-emoji';
+            emojiSpan.textContent = '✨';
+            
+            tipElement.appendChild(emojiSpan);
+            tipElement.appendChild(document.createTextNode(` ${tutorial.tip}`));
+            
+            contentDiv.appendChild(tipElement);
+            }
+        }
+        
+        //生成PC端教程卡片内容 - 独立函数
+        function generatePCCardContent(card, tutorial) {
+            //获取卡片内容容器
+            const contentDiv = card.querySelector('.pc-card-content');
+            contentDiv.innerHTML = ''; //清空现有内容
+            
+            //更新卡片背景
+            if (tutorial.background) {
+                card.style.backgroundImage = `url('${tutorial.background}')`;
+            }
+            
+            //添加标题
+            const titleElement = document.createElement('h1');
+            titleElement.innerHTML = tutorial.title; //使用innerHTML支持<br>标签
+            contentDiv.appendChild(titleElement);
+            
+            //添加步骤容器
+            const stepsContainer = document.createElement('div');
+            stepsContainer.className = 'pc-steps-container';
+            
+            //创建左右两列
+            const leftColumn = document.createElement('div');
+            leftColumn.className = 'pc-steps-column';
+            
+            const rightColumn = document.createElement('div');
+            rightColumn.className = 'pc-steps-column';
+            
+            //遍历所有步骤，将它们分为左右两列
+            tutorial.steps.forEach((step, index) => {
+                const stepElement = document.createElement('div');
+                stepElement.className = 'pc-step';
+                
+                //创建步骤图片
+                const stepImg = document.createElement('img');
+                stepImg.src = step.image;
+                stepImg.className = 'pc-step-img';
+                stepImg.alt = step.title;
+                
+                //创建步骤内容区
+                const stepContent = document.createElement('div');
+                stepContent.className = 'pc-step-content';
+                
+                //创建步骤标题和描述
+                const stepTitle = document.createElement('div');
+                stepTitle.className = 'pc-step-title';
+                stepTitle.textContent = `${step.number}. ${step.title}`;
+                
+                const stepDesc = document.createElement('div');
+                stepDesc.className = 'pc-step-description';
+                stepDesc.textContent = step.description;
+                
+                //组装步骤内容
+                stepContent.appendChild(stepTitle);
+                stepContent.appendChild(stepDesc);
+                
+                stepElement.appendChild(stepImg);
+                stepElement.appendChild(stepContent);
+                
+                //步骤1-5放在左列，6-10放在右列
+                if (index < 5) {
+                    leftColumn.appendChild(stepElement);
+                } else {
+                    rightColumn.appendChild(stepElement);
+                }
+            });
+            
+            //将两列添加到步骤容器
+            stepsContainer.appendChild(leftColumn);
+            stepsContainer.appendChild(rightColumn);
+            contentDiv.appendChild(stepsContainer);
+            
+            //添加提示
+            const tipElement = document.createElement('div');
+            tipElement.className = 'pc-tip';
+            
+            const emojiSpan = document.createElement('span');
+            emojiSpan.className = 'pc-emoji';
+            emojiSpan.textContent = '✨';
+            
+            tipElement.appendChild(emojiSpan);
+            tipElement.appendChild(document.createTextNode(` ${tutorial.tip}`));
+            
+            contentDiv.appendChild(tipElement);
+        }
+        
+        //页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const isMobile = window.innerWidth <= 768;
+            
+            // 获取当前要显示的教程类型和索引
+            const currentCharacterType = getUrlParam('character') || getUrlParam('type') || 'frog';
+            
+            // 获取所有角色类型
+            const characterTypes = Object.keys(initialData.tutorials);
+            
+            // 输出调试信息
+            console.log('URL参数解析结果:', currentCharacterType);
+            console.log('可用的教程类型:', characterTypes);
+            console.log('面包教程是否存在:', initialData.tutorials['bread'] ? '存在' : '不存在');
+            
+            // 计算当前角色在列表中的索引
+            const initialIndex = characterTypes.indexOf(currentCharacterType);
+            // 确保索引有效，默认为0
+            currentIndex = initialIndex >= 0 ? initialIndex : 0;
+            
+            // 再次确认当前要显示的数据
+            const actualTutorial = initialData.tutorials[currentCharacterType] || initialData.tutorials['frog'];
+            console.log('最终选择显示的教程类型:', currentCharacterType, '教程ID:', actualTutorial.id, '索引:', currentIndex);
+            
+            // 设置主返回按钮点击事件
+            const mainBackButton = document.getElementById('back-button');
+            if (mainBackButton) {
+                mainBackButton.onclick = function() {
+                    window.location.href = `puppy_tutorial.html?id=${currentCharacterType}`;
+                };
+            }
+            
+            // 设置PC端返回按钮图标
+            const pcBackButton = document.getElementById('pc-back-button');
+            if (pcBackButton) {
+                const tutorialData = initialData.tutorials[currentCharacterType] || initialData.tutorials.frog;
+                const backIconUrl = tutorialData.backButton?.icon;
+                
+                const backImg = document.createElement('img');
+                if (backIconUrl) {
+                    backImg.src = backIconUrl;
+                } else {
+                    backImg.src = "青蛙过程图片+背景+摁钮/Polygon 1.png";
+                }
+                backImg.alt = "返回";
+                backImg.onerror = function() {
+                    // 图片加载失败时使用默认图标
+                    this.src = "青蛙过程图片+背景+摁钮/Polygon 1.png";
+                    console.log("PC端返回按钮图标加载失败，使用默认图标");
+                };
+                pcBackButton.appendChild(backImg);
+                
+                // 添加点击事件，返回到puppy_tutorial.html并携带参数
+                pcBackButton.onclick = function() {
+                    window.location.href = `puppy_tutorial.html?id=${currentCharacterType}`;
+                };
+            }
+            
+            //移动端初始化 - 完全独立的逻辑
+            if (isMobile) {
+                initMobileView(characterTypes);
+            } 
+            //PC端初始化 - 完全独立的逻辑
+            else {
+                initPCView(characterTypes);
+            }
+        });
+        
+        //移动端视图初始化 - 独立函数
+        function initMobileView(characterTypes) {
+            const mobileCarousel = document.querySelector('.mobile-carousel');
+            
+            // 清空现有的卡片
+            mobileCarousel.innerHTML = '';
+            
+            // 获取当前要显示的教程类型
+            const currentCharacterType = getUrlParam('character') || getUrlParam('type') || 'frog';
+            
+            // 获取当前角色的索引
+            const currentIndex = characterTypes.indexOf(currentCharacterType);
+            const actualIndex = currentIndex >= 0 ? currentIndex : 0;
+            const actualType = currentIndex >= 0 ? currentCharacterType : 'frog';
+            
+            console.log('移动端初始化 - 教程类型:', actualType, '索引:', actualIndex);
+            
+            // 动态创建所有角色的卡片
+            characterTypes.forEach((characterType, index) => {
+                // 创建新卡片
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'mobile-card';
+                cardDiv.setAttribute('data-tutorial-id', characterType);
+                
+                // 获取当前角色的数据
+                const tutorialData = initialData.tutorials[characterType];
+                if (!tutorialData) {
+                    console.error('未找到教程数据:', characterType);
+                    return;
+                }
+                
+                // 为当前显示的卡片添加激活标记
+                if (characterType === actualType) {
+                    cardDiv.classList.add('active');
+                    console.log('激活移动端卡片:', characterType);
+                }
+                
+                // 添加返回按钮
+                const backButton = document.createElement('div');
+                backButton.className = 'back-button';
+                backButton.style.zIndex = '2000'; // 确保更高的z-index
+                console.log('创建返回按钮元素:', backButton);
+
+                // 使用click事件代替addEventListener
+                backButton.onclick = function(event) {
+                    console.log('返回按钮被点击 - onclick方法触发');
+                    event.stopPropagation(); // 阻止事件冒泡
+                    event.preventDefault(); // 阻止默认行为
+                    // 直接触发跳转
+                    console.log('尝试跳转到:', `puppy_tutorial.html?id=${characterType}`);
+                    window.location.href = `puppy_tutorial.html?id=${characterType}`;
+                    return false; // 确保不继续传播
+                };
+                
+                // 添加返回按钮图标
+                const backImg = document.createElement('img');
+                // 从卡片自己的数据中获取图标，类似获取background和title的方式
+                const backIconPath = tutorialData.backButton?.icon;
+                console.log('返回按钮图标路径:', backIconPath);
+                backImg.src = backIconPath;
+                backImg.alt = "返回";
+                backImg.style.pointerEvents = 'auto'; // 确保图片可点击
+                backImg.onclick = function(event) {
+                    console.log('移动端返回按钮图片被点击', characterType);
+                    event.stopPropagation();
+                    window.location.href = `puppy_tutorial.html?id=${characterType}`;
+                    return false;
+                };
+                backImg.onload = function() {
+                    console.log('返回按钮图标加载成功:', backIconPath);
+                };
+                backImg.onerror = function() {
+                    // 图片加载失败时使用青蛙的图标作为后备
+                    console.log('返回按钮图标加载失败:', backIconPath);
+                    this.src = "青蛙过程图片+背景+摁钮/Polygon 1.png";
+                    console.log("返回按钮图标加载失败，使用默认图标");
+                };
+                backButton.appendChild(backImg);
+                cardDiv.appendChild(backButton);
+                
+                // 添加叶子装饰
+                for (let i = 1; i <= 4; i++) {
+                    const leafDiv = document.createElement('div');
+                    leafDiv.className = `leaf leaf-${i}`;
+                    cardDiv.appendChild(leafDiv);
+                }
+                
+                // 添加内容容器
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'mobile-card-content';
+                cardDiv.appendChild(contentDiv);
+                
+                // 将卡片添加到轮播
+                mobileCarousel.appendChild(cardDiv);
+
+                // 调试代码：打印返回按钮的DOM结构
+                console.log('返回按钮DOM:', backButton);
+                console.log('返回按钮样式:', window.getComputedStyle(backButton));
+            });
+            
+            //获取新创建的所有卡片
+            const allCards = document.querySelectorAll('.mobile-card');
+            
+            //为每个卡片生成内容
+            allCards.forEach((card) => {
+                const tutorialId = card.getAttribute('data-tutorial-id');
+                if (tutorialId && initialData.tutorials[tutorialId]) {
+                    generateMobileCardContent(card, initialData.tutorials[tutorialId]);
+                }
+            });
+            
+            //初始化移动端轮播
+            initMobileCarousel();
+            
+            //显示移动端容器
+            document.querySelector('.mobile-container').style.display = 'block';
+        }
+        
+        //PC端视图初始化 - 独立函数
+        function initPCView(characterTypes) {
+            const swiperWrapper = document.querySelector('.swiper-wrapper');
+            
+            //清空现有的卡片
+            swiperWrapper.innerHTML = '';
+            
+            //动态创建所有角色的卡片
+            characterTypes.forEach((characterType) => {
+                //创建新卡片
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'swiper-slide';
+                
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'pc-card';
+                cardDiv.setAttribute('data-tutorial-id', characterType);
+                
+                
+                
+                //添加内容容器
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'pc-card-content';
+                cardDiv.appendChild(contentDiv);
+                
+                //将卡片添加到轮播
+                slideDiv.appendChild(cardDiv);
+                swiperWrapper.appendChild(slideDiv);
+            });
+            
+            //获取新创建的所有卡片
+            const allCards = document.querySelectorAll('.pc-card');
+            
+            //为每个卡片生成内容
+            allCards.forEach((card) => {
+                const tutorialId = card.getAttribute('data-tutorial-id');
+                if (tutorialId && initialData.tutorials[tutorialId]) {
+                    generatePCCardContent(card, initialData.tutorials[tutorialId]);
+                }
+            });
+            
+            //初始化PC端Swiper轮播
+            initSwiper();
+            
+            //显示PC端容器
+            document.querySelector('.pc-container').style.display = 'block';
+        }
+        
+        // 初始化移动端轮播
+        function initMobileCarousel() {
+            const mobileCarousel = document.querySelector('.mobile-carousel');
+            const cards = Array.from(document.querySelectorAll('.mobile-card'));
+            
+            // 获取URL参数确定初始位置
+            const currentCharacterType = getUrlParam('character') || getUrlParam('type') || 'frog';
+            
+            // 找到当前角色在轮播中的索引
+            let initialCardIndex = cards.findIndex(card => card.getAttribute('data-tutorial-id') === currentCharacterType);
+            if (initialCardIndex === -1) initialCardIndex = 0;
+            
+            console.log('移动端轮播初始化 - 设置初始卡片:', currentCharacterType, '索引:', initialCardIndex);
+            
+            // 设置初始位置 - 禁用动画
+            mobileCarousel.style.transition = 'none';
+            const cardWidth = window.innerWidth;
+            const offset = -initialCardIndex * cardWidth;
+            mobileCarousel.style.transform = `translateX(${offset}px)`;
+            
+            // 强制浏览器重绘，确保transition:none生效
+            void mobileCarousel.offsetWidth;
+            
+            // 当前索引
+            let currentIndex = initialCardIndex;
+            
+            // 监听触摸事件实现轮播滑动
+            let startX = 0;
+            let currentX = 0;
+            
+            // 处理触摸事件
+            mobileCarousel.addEventListener('touchstart', handleTouchStart);
+            mobileCarousel.addEventListener('touchmove', handleTouchMove);
+            mobileCarousel.addEventListener('touchend', handleTouchEnd);
+            
+            function handleTouchStart(e) {
+                // 确保是用户的手势触发，而不是页面加载
+                startX = e.touches[0].clientX;
+                currentX = startX;
+                mobileCarousel.style.transition = 'none';
+            }
+            
+            function handleTouchMove(e) {
+                currentX = e.touches[0].clientX;
+                const diff = currentX - startX;
+                const baseOffset = -currentIndex * cardWidth;
+                
+                // 限制边界
+                if ((currentIndex === 0 && diff > 0) || 
+                    (currentIndex === cards.length - 1 && diff < 0)) {
+                    mobileCarousel.style.transform = `translateX(${baseOffset + diff * 0.3}px)`;
+                } else {
+                    mobileCarousel.style.transform = `translateX(${baseOffset + diff}px)`;
+                }
+            }
+            
+            function handleTouchEnd(e) {
+                const diff = currentX - startX;
+                
+                // 启用动画过渡效果，但只针对用户手势触发的滑动
+                mobileCarousel.style.transition = 'transform 0.3s ease-out';
+                
+                if (Math.abs(diff) > cardWidth * 0.2) {
+                    if (diff > 0 && currentIndex > 0) {
+                        currentIndex--;
+                    } else if (diff < 0 && currentIndex < cards.length - 1) {
+                        currentIndex++;
+                    }
+                }
+                
+                // 移动到新位置
+                mobileCarousel.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+                
+                // 更新当前卡片ID
+                const currentCard = cards[currentIndex];
+                if (currentCard) {
+                    const tutorialId = currentCard.getAttribute('data-tutorial-id');
+                    console.log('移动端轮播切换到:', tutorialId, '索引:', currentIndex);
+                }
+            }
+            
+            // 监听窗口大小变化，重新计算位置
+            window.addEventListener('resize', function() {
+                // 禁用动画
+                mobileCarousel.style.transition = 'none';
+                
+                // 计算新的卡片宽度和位置
+                    const newCardWidth = window.innerWidth;
+                mobileCarousel.style.transform = `translateX(${-currentIndex * newCardWidth}px)`;
+                
+                // 强制重绘
+                void mobileCarousel.offsetWidth;
+            });
+        }
+        
+        //初始化Swiper - 独立函数
+        function initSwiper() {
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 3,
+                spaceBetween: 0,
+                centeredSlides: true,
+                loop: true,
+                initialSlide: currentIndex, // 设置初始显示的卡片
+                speed: 0, // 禁用初始化动画
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: false,
+                },
+                effect: 'coverflow',
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: false,
+                },
+                on: {
+                    init: function() {
+                        console.log('Swiper初始化完成，显示索引:', currentIndex);
+                        // 初始化完成后恢复正常切换速度
+                        setTimeout(() => {
+                            this.params.speed = 300;
+                        }, 100);
+                    },
+                    slideChange: function() {
+                        // 当PC端轮播切换时，更新返回按钮图标
+                        updatePCBackButtonIcon(this);
+                    }
+                }
+            });
+            
+            // 初始化时设置一次返回按钮
+            updatePCBackButtonIcon(swiper);
+        }
+        
+        // 更新PC端返回按钮图标
+        function updatePCBackButtonIcon(swiper) {
+            const pcBackButton = document.getElementById('pc-back-button');
+            if (!pcBackButton) return;
+            
+            // 清空当前图标
+            pcBackButton.innerHTML = '';
+            
+            // 获取当前活动的slide
+            const activeSlide = swiper.slides[swiper.activeIndex];
+            if (!activeSlide) return;
+            
+            // 获取当前卡片的教程ID
+            const card = activeSlide.querySelector('.pc-card');
+            if (!card) return;
+            
+            const tutorialId = card.getAttribute('data-tutorial-id');
+            if (!tutorialId) return;
+            
+            // 获取对应教程的返回按钮图标
+            const tutorialData = initialData.tutorials[tutorialId];
+            if (!tutorialData) return;
+            
+            // 更新返回按钮点击事件，实现返回到puppy_tutorial.html并携带当前卡片ID参数
+            pcBackButton.onclick = function() {
+                window.location.href = `puppy_tutorial.html?id=${tutorialId}`;
+            };
+            
+            // 设置新的返回按钮图标
+            const backIconUrl = tutorialData.backButton?.icon;
+            if (!backIconUrl) {
+                console.log("未找到对应的返回按钮图标，使用默认图标");
+                const backImg = document.createElement('img');
+                backImg.src = "青蛙过程图片+背景+摁钮/Polygon 1.png";
+                backImg.alt = "返回";
+                pcBackButton.appendChild(backImg);
+                return;
+            }
+            
+            const backImg = document.createElement('img');
+            backImg.src = backIconUrl;
+            backImg.alt = "返回";
+            backImg.onclick = function() {
+                console.log('PC端返回按钮被点击', tutorialId);
+                window.location.href = `puppy_tutorial.html?id=${tutorialId}`;
+            };
+            backImg.onerror = function() {
+                // 图片加载失败时使用默认图标
+                this.src = "青蛙过程图片+背景+摁钮/Polygon 1.png";
+                console.log("PC端返回按钮图标加载失败，使用默认图标");
+            };
+            pcBackButton.appendChild(backImg);
+        }
+
+        // 当轮播切换时，更新卡片激活状态
+        const slides = document.querySelectorAll('.tutorial-container');
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // URL参数解析函数
+        function getUrlParam(name) {
+            const url = new URL(window.location.href);
+            const value = url.searchParams.get(name);
+            console.log(`尝试获取URL参数 ${name}:`, value);
+            return value;
+        }
+    </script>
+</body>
+</html> 
   
