@@ -32,6 +32,21 @@
     font-style: normal;
 }
 
+    /* 可访问性：跳过链接 */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: black;
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      left: 0;
+    }
+
 /* cite: local fonts stored in ./fonts/ */
 @font-face {
     font-family: 'Afacad';
