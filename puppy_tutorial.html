@@ -811,6 +811,8 @@
             
             // 检查当前活动的卡片
             const activeSlide = document.querySelector('.swiper-slide-active');
+            console.log('当前活动卡片1:', activeSlide);
+            console.log('当前活动卡片2:', activeSlide.dataset.tutorialId);
             if (!activeSlide || !activeSlide.dataset.tutorialId) {
                 console.error('找不到活动的轮播项');
                 return;
