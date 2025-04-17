@@ -730,6 +730,15 @@
                 height: 270px;
             }
         }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
     </style>
 
     <script>
@@ -1484,6 +1493,7 @@
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
       
     <!-- 移动端容器 - 完全独立结构 -->
     <div class="mobile-container" style="display: none;">
@@ -1493,7 +1503,7 @@
             </div>
             
     <!-- PC端容器 - 完全独立结构 -->
-    <div class="pc-container" style="display: none;">
+    <div class="pc-container" id="main-content" style="display: none;">
         <!-- PC端返回按钮 -->
         <div class="back-button" id="pc-back-button">
             <!-- 图标将通过JavaScript动态加载 -->
