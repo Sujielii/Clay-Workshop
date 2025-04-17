@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- ensures latest IE rendering engine -->
+   <!-- ensures latest IE rendering engine -->
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Clay Workshop</title>
 
@@ -595,9 +595,35 @@ h1 br {
                 display: none;
             }
         }
-    </style>
+
+/* Skip link styles */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
 </head>
 <body>
+   
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- PC端导航栏 -->
     <div class="nav-bar" id="pc-nav-bar">
         <div class="nav-container">
@@ -616,7 +642,7 @@ h1 br {
         <div class="loader"></div>
     </div>
 
-    <div class="welcome-container">
+    <div class="welcome-container" id="main-content">
         <div class="characters-container">
             <!-- 雪人图案 - 水平翻转、旋转45度、调整尺寸、向右移动 -->
             <a href="puppy_tutorial.html?id=snowman" class="character-link" style="position: fixed;top: -3%; right: -2%; width: 26%;">
@@ -686,7 +712,7 @@ h1 br {
 
         <div class="welcome-content">
             <div class="book-icon">
-                <a href="lightweight_clay.html" title="了解轻质粘土 ">
+                <a href="lightweight_clay.html">
                     <img src="images/Book open.png" alt="Book Icon">
                 </a>
             </div>
