@@ -239,6 +239,16 @@ body {
                 display: none;
             }
         }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
     </style>
 </head>
 <body>
